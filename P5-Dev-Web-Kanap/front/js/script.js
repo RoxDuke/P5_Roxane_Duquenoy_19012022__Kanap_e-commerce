@@ -40,7 +40,7 @@ fetch(" http://localhost:3000/api/products")
         article.appendChild(h3);
         article.appendChild(p);
 
-//Element = nom des données fournit dans l'API 
+//Eléments = noms des données fournit dans l'API 
         a.href = "product.html?id=" + product._id;
         img.src = product.imageUrl;
         h3.innerHTML = product.name;
