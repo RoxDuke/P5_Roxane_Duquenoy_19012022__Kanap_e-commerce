@@ -48,3 +48,21 @@ fetch("http://localhost:3000/api/products/"+productId)
         }
     })
   
+//Eléments à ajouter dans le panier lors du clic de l'utilisateur 
+let button = document.getElementById('addToCart');
+
+
+button.onclick = function ToCart(){
+    let id = "id"
+    let name = "name"
+    let color = "colors".value
+    let quantity = "0quantityNumber".value
+//Renvoi vers la page panier et envoi dans le local storage
+    addBasket(productId)
+    window.location.assign("cart.html")
+}
+    
+
+
+   
+    
