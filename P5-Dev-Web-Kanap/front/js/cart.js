@@ -1,33 +1,39 @@
 // Récupération du panier dans le local storage
-let basket = localStorage.getItem("basket"); 
-let cart = document.getElementById('cart__items');
+let basket = getBasket();
 
+if(basket.length == 0){
+    alert('Votre panier est vide')
+}
 
-function showCart(basket){
-   showCart.forEach(showCart => {
-       if(basket.lenght){
-        return []
-    }
-    console.log("coucou")
-   });
-    
-    
-//     // cart.forEach(function(cart){
-//     // // let cart = document.getElementById('cart__items');
-//     // img = document.createElement('img');
-//     //     img.classList.add('productImage');
-//     // h2 = document.createElement('h2');
-//     //     h2.classList.add('productName');
-//     // p = document.createElement('p');
-//     //     p.classList.add('price');
-//     // p = document.createElement('p');    
-//     //     p.classList.add('quantity');
+// Récupération des éléments HTML avec l'interpolation de variables 
+// Pour chaque produits dans le panier
+for(let product of basket){
 
-//     // cart.appendChild(img);
-//     // img.appendChild(h2);
-//     // h2.appendChild(p);
-//     // h2.appendChild(p);
+    document.querySelector('#cart__items').innerHTML =
 
-// })
+    `<article class="cart__item" data-id="${product.productId}" data-color="${product.color}">
 
+    <div class="cart__item__img">
+    <img src="${product.imageUrl}" alt="${product.altTxt}"></img>
+    </div>
+
+    <div class="cart__item__content">
+    <div class="cart__item__content__description">
+        <h2>"${product.name}"</h2>
+        <p>"${product.color}"</p>
+        <p>"${product.price}"€</p>
+    </div>
+
+    <div class="cart__item__content__settings">
+        <div class="cart__item__content__settings__quantity">
+        <p>"${product.quantity}" </p>
+        <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${product.quantity}"></input>
+    </div>
+            <div class="cart__item__content__settings__delete">
+        <p class="deleteItem">Supprimer</p>
+        </div>
+    </div>
+    </div>
+    </article> `
+console.log(basket)
 }
