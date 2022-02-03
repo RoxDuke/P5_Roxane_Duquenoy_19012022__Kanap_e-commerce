@@ -1,3 +1,14 @@
+function getProduct(productId){
+    return fetch("http://localhost:3000/api/products/"+productId)
+        .then(function(response){
+            if(response.status == 200){
+               return response.json()
+            }              
+        })
+    }
+
+
+
 //Création d'un produit avec les éléments
 // ParseInt() pour founir un entier à partir de la chaîne de caractère quantité
 function createProduct(productId, name, color, quantity){
