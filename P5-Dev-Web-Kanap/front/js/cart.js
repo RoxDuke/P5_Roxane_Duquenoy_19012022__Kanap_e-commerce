@@ -39,7 +39,7 @@ for(let product of basket){
         </div>
         </div>
         </article> `
-            
+            console.log(product.color)
         }).then(function(){
                 // document.querySelectorAll(".deleteItem").forEach(item => addEventListener("click",(element) => {
                 // let deleteItem = element.target.closest('[data-id]')
@@ -48,13 +48,13 @@ for(let product of basket){
                 // window.location.assign("cart.html")
             // }));
 // Modification de l'élément dans le panier avec délégation d'événements
-                let itemQuantity = document.querySelectorAll(".itemQuantity")
+                let itemQuantity = document.querySelectorAll(".itemQuantity").value
 
                 itemQuantity.forEach((item) => { 
                     item.addEventListener("change", (element) => {
                     let quantity = element.target.closest('.itemQuantity').value
                     let quantityNumber = parseInt(quantity)
-                    
+
                     if(quantityNumber <= 0){
                             removeFromBasket(product)
                             window.location.assign("cart.html")
@@ -63,14 +63,17 @@ for(let product of basket){
                             window.location.assign("cart.html")
                         }}
                     else{
-                            changeQuantity(productId,color,quantity)
+                        changeQuantity(productId,product.color,quantity)
+                        window.location.assign("cart.html")
                         } 
                         
                     })
                 })
-            })
+//                 getNumberProduct()
+//                 getTotalPrice()        
+
+})
 }
 
-// getNumberProduct()
-// getTotalPrice()
+
     

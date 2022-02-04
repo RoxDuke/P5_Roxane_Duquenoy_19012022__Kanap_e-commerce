@@ -65,6 +65,7 @@ function addBasket(productId, name, color, quantity){
 }
 
 //-----------------Sur la page panier-------------------//
+
 // //Retirer un produit du panier 
 function removeFromBasket(product){
      let basket = getBasket();
@@ -73,32 +74,34 @@ function removeFromBasket(product){
      saveBasket(basket);
 }
 //Modifier la quantité dans le panier une fois le produit trouvé dans celui-ci
-function changeQuantity(productId,quantity){
+function changeQuantity(productId,color,quantity){
     let basket = getBasket();
     let position = findProduct(basket, productId,color);
-        if(position == 1){
+        if(position >= 0){
             basket[position].quantity = basket[position].quantity + parseInt(quantity);
+            console.log("coucou")
         }
+        console.log(changeQuantity)
     saveBasket(basket);
  }
-//Calculer la quantité dans le panier
-//Nous retourne le nombre d'articles dans le panier
-function getNumberProduct(){
-    let basket = getBasket();
-    let number = 0;
-    for(let product of basket){
-        number = number + product.quantity;
-    }
-    return number; 
+// //Calculer la quantité dans le panier
+// //Nous retourne le nombre d'articles dans le panier
+// function getNumberProduct(){
+//     let basket = getBasket();
+//     let number = 0;
+//     for(let product of basket){
+//         number = number + product.quantity;
+//     }
+//     return number; 
     
-}
-//Calculer le prix
-//Nous retourne le prix total des articles du panier 
-function getTotalPrice(){
-    let basket = getBasket();
-    let total = 0;
-    for (let product of basket){
-        total = total + product.quantity * product.price;
-    }
-    return total;
-}
+// }
+// //Calculer le prix
+// //Nous retourne le prix total des articles du panier 
+// function getTotalPrice(){
+//     let basket = getBasket();
+//     let total = 0;
+//     for (let product of basket){
+//         total = total + product.quantity * product.price;
+//     }
+//     return total;
+// }
