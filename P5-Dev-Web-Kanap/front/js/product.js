@@ -22,9 +22,7 @@ fetch("http://localhost:3000/api/products/"+productId)
             let imgContainer = document.querySelector(".item__img");
             let imgElt = document.createElement("img");
                              
-            response.json()
-
-            .then (data =>{
+            response.json().then (data =>{
             console.log(data)   
             name.innerHTML = data.name;
             price.innerHTML = data.price;
