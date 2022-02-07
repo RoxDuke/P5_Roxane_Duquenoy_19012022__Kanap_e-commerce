@@ -42,30 +42,38 @@ async function addListerners(){
         
         for(cartItem of itemQuantity){
             console.log(cartItem.getAttribute("data-id"))
-
             let color = cartItem.dataset.color
             let productId = cartItem.dataset.id 
             
+            
             cartItem.addEventListener("change", function(item){
                 let quantity = item.target.closest(".itemQuantity").value;
+                console.log(quantity)
                 changeQuantity(productId, color, quantity)
+
+            
+
+       
+                let newQuantity = item.target.closest("p.");
+                console.log(newQuantity)      
+                if(newQuantity != quantity){
+                   quantity == newQuantity
+console.log(newQuantity)    
+                    
+             }  
+            })
+            
+             cartItem.addEventListener("click", function(remove){
+                let deleteItem = remove.target.closest("[data-id]");
+                let productId = deleteItem.dataset;
+                removeFromBasket(productId);
+                console.log(productId)
                 
-                let newQuantity = changeQuantity(productId, color, quantity)
-                if(quantity != newQuantity){
-                    quantity.onchange();
-                }  
             })
-
-            cartItem.addEventListener("click", function(itemDelete){
-                let deleteItem = document.getElementsByClassName("cart__item__content__settings__delete")
-                let deleteItem = element.target.closest("[data-id]")
-                let product = deleteItem.dataset
-                removeFromBasket(product);
-
-            })
-            }
+            
+        }}
                
-}
+
 
 
 async function create_cart(){
@@ -84,5 +92,14 @@ else{
     create_cart()
 }      
 
+setTotalQuantity()
+setTotalPrice()
+console.log(setTotalPrice)
 
-    
+// //Formulaire utilisateur
+// let firstName = document.getElementById("firstName");
+// let lastName = document.getElementById("lastName");
+// let adress = document.getElementById("address");
+// let city = document.getElementById("city");
+// let email = document.getElementById("email");
+// let order = document.getElementById("order");

@@ -1,4 +1,5 @@
-//------------Sur la page du produit------------//
+//---------------Sur la page du produit---------------//
+
 //Récupérer les éléments du produit dans l'API
 function getProduct(productId){
     return fetch("http://localhost:3000/api/products/"+productId)
@@ -67,10 +68,10 @@ function addBasket(productId, name, color, quantity){
 //-----------------Sur la page panier-------------------//
 
 // //Retirer un produit du panier 
-function removeFromBasket(product){
+function removeFromBasket(productId){
      let basket = getBasket();
 // filter = filtrer un tableau par rapport à une condition 
-     basket = basket.filter(p => product.id != product.id)
+     basket = basket.filter(p => p.productId != productId)
      saveBasket(basket);
 }
 //Modifier la quantité dans le panier une fois le produit trouvé dans celui-ci
@@ -107,13 +108,37 @@ function getNumberProduct(){
     return number; 
     
 }
-// //Calculer le prix
-// //Nous retourne le prix total des articles du panier 
-// function getTotalPrice(){
-//     let basket = getBasket();
-//     let total = 0;
-//     for (let product of basket){
-//         total = total + product.quantity * product.price;
-//     }
-//     return total;
-// }
+//Affichage de la quantité de produits dans le panier 
+function setTotalQuantity(){
+    let totalQuantity = document.getElementById("totalQuantity");
+    let newQuantity = document.createTextNode(`${getNumberProduct()}`);
+    if (newQuantity != undefined){
+        totalQuantity.replaceChild(newQuantity, totalQuantity.childNodes[0])
+    }
+//Sinon, ajoute la nouvelle quantité à la fin de la liste du parent(totalQuantity)
+    else{
+        totalQuantity.appendChild(newQuantity)
+    }
+}
+//Calculer le prix
+//Nous retourne le prix total des articles du panier 
+function getTotalPrice(){
+    let basket = getBasket();
+    let total = 0;
+    for (let product of basket){
+        total = total + product.quantity * product.price;
+    }
+    return total;
+}
+
+//Affichage du prix total des articles dans le panier 
+function setTotalPrice(){
+    let totalPrice = document.getElementById("totalPrice");
+    let newPrice = document.createTextNode(`${getTotalPrice()}`);
+    if (newPrice != undefined){
+        totalPrice.replaceChild(newPrice, totalPrice.childNodes[0])
+    }
+    else{
+        totalPrice.appendChild(newPrice)
+    }
+}
