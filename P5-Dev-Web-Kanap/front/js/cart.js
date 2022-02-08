@@ -48,34 +48,27 @@ async function addListerners(){
             
             cartItem.addEventListener("change", function(item){
                 let quantity = item.target.closest(".itemQuantity").value;
-                console.log(quantity)
-                changeQuantity(productId, color, quantity)
-
-            
-
-       
-                let newQuantity = item.target.closest("p.");
-                console.log(newQuantity)      
-                if(newQuantity != quantity){
-                   quantity == newQuantity
-console.log(newQuantity)    
-                    
-             }  
-            })
-            
-             cartItem.addEventListener("click", function(remove){
-                let deleteItem = remove.target.closest("[data-id]");
-                let productId = deleteItem.dataset;
-                removeFromBasket(productId);
-                console.log(productId)
                 
+                changeQuantity(productId, color, quantity)
+//VERIFIER MAJ QTE/ PB ID 
+                let newQuantity = document.querySelector(".itemQuantity").value;
+                newQuantity.textContent = item.target.value;
+           console.log(newQuantity)
+//
             })
+// //VERIFIER SUPP PDT + ACTUALISATION DE LA PAGE            
+//              cartItem.addEventListener("click", function(remove){
+//                 let removeItem = remove.target.closest("[data-id]");
+//                 let product = removeItem.dataset;
+//                 removeFromBasket(productId);
+//                 window.location.assign("cart.html")
+//                 console.log(productId)
+//  //               
+            // })
             
-        }}
+}
+}
                
-
-
-
 async function create_cart(){
     await addItems()
     addListerners()
@@ -91,15 +84,32 @@ if(basket.length == 0){
 else{
     create_cart()
 }      
-
 setTotalQuantity()
 setTotalPrice()
-console.log(setTotalPrice)
+console.log(totalPrice)
 
-// //Formulaire utilisateur
-// let firstName = document.getElementById("firstName");
-// let lastName = document.getElementById("lastName");
-// let adress = document.getElementById("address");
-// let city = document.getElementById("city");
-// let email = document.getElementById("email");
-// let order = document.getElementById("order");
+//---------Formulaire pour passer la commande---------
+//Formulaire utilisateur
+let form = document.querySelector(".cart__order__form");
+
+form.addEventListener("submit", function (element) {
+    element.preventDefault()
+    let userFirstName = document.getElementById("firstName");
+    let userLastName = document.getElementById("lastName");
+    let userAddress = document.getElementById("address");
+    let userCity = document.getElementById("city");
+    let userEmail = document.getElementById("email");
+    let order = document.getElementById("order");
+    
+//Création de l'object contact
+    contact = {
+    firstName : userFirstName,
+    lastName : userLastName,
+    address : userAddress, 
+    city : userCity,
+    email : userEmail,
+    }
+
+
+
+})

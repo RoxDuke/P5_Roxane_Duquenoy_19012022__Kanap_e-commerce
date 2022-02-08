@@ -124,11 +124,12 @@ function setTotalQuantity(){
 //Nous retourne le prix total des articles du panier 
 function getTotalPrice(){
     let basket = getBasket();
-    let total = 0;
+    let number = 0;
     for (let product of basket){
-        total = total + product.quantity * product.price;
+        number = number + product.quantity * product.price;
     }
-    return total;
+    return number;
+
 }
 
 //Affichage du prix total des articles dans le panier 
@@ -142,3 +143,58 @@ function setTotalPrice(){
         totalPrice.appendChild(newPrice)
     }
 }
+//------------------Vérification du formulaire-----------
+//Vérification du format des champs de saisies, noms/prénoms/ville 
+function valideName (inputName){
+    let name = new RegExp (/^[a-z ,.'-]+$/i);
+    let testName = name.test(inputName.value);
+    let message = inputName.nextElementSibling;
+    if(testName){
+        message.innerHTML = "";
+        return true;
+    }
+    else{
+        message.innerHTML ="Invalid";
+        return false;
+    }
+}
+//Vérification du format de saisie de mail 
+function valideMail(inputMail){
+    let mail = new RegExp (/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
+    let tesMail = mail.test(inputMail.value);
+    let message = inputMail.nextElementSibling;
+    if(testMail){
+        message.innerHTML = "";
+        return true;
+    }
+    else{
+        message.innerHTML = "Invalid";
+        return false; 
+    }
+}
+//Envoi vers le local storage
+function saveContact(contact){
+    localStorage.setItem("contact", JSON.stringify(contact))
+}
+//Récupération du contact dans le local storage
+function getContact(){
+    let contact = localStorage.getItem("contact");
+    if(contact == null){
+        return []
+    }
+    else{
+        return JSON.parse(contact)
+    }
+}
+// //Validation du formulaire
+// function checkForm(){
+// let form = document.querySelector(".cart__order__form");  
+// if(document.form.value != ""){
+//     //on envoie le formulaire vers l'API
+
+// }
+// else{
+//     alert('Merci de bien vouloir remplir tout les champs de saisie')
+
+// }
+// }
