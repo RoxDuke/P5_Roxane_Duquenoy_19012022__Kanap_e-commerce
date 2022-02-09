@@ -126,7 +126,7 @@ function getTotalPrice(){
     let basket = getBasket();
     let number = 0;
     for (let product of basket){
-        number = number + product.quantity * product.price;
+        number = number + parseInt(product.quantity) * parseInt(product.price);
     }
     return number;
 
@@ -144,10 +144,24 @@ function setTotalPrice(){
     }
 }
 //------------------Vérification du formulaire-----------
-//Vérification du format des champs de saisies, noms/prénoms/ville 
+//Vérification du format des champs de saisies, noms/prénoms
 function valideName (inputName){
-    let name = new RegExp (/^[a-z ,.'-]+$/i);
-    let testName = name.test(inputName.value);
+    let regExName = new RegExp (/^[a-zA-Z '-]+$/i);
+    let testName = regExName.test(inputName.value);
+    let message = inputName.nextElementSibling;
+    if(testName){
+        message.innerHTML = "";
+        return true;
+    }
+    else{
+        message.innerHTML ="Invalid";
+        return false;
+    }
+}
+//Vérification du format des champs de saisies, adresse/ville 
+function valideCity (inputName){
+    let regExCity = new RegExp (/^[a-zA-Z-0-9 '-]+$/i);
+    let testName = regExCity.test(inputName.value);
     let message = inputName.nextElementSibling;
     if(testName){
         message.innerHTML = "";
@@ -160,8 +174,8 @@ function valideName (inputName){
 }
 //Vérification du format de saisie de mail 
 function valideMail(inputMail){
-    let mail = new RegExp (/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
-    let tesMail = mail.test(inputMail.value);
+    let regExMail = new RegExp (/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
+    let tesMail = regExMail.test(inputMail.value);
     let message = inputMail.nextElementSibling;
     if(testMail){
         message.innerHTML = "";

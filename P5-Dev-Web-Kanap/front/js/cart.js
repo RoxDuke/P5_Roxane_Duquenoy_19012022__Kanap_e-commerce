@@ -51,27 +51,36 @@ async function addListerners(){
                 
                 changeQuantity(productId, color, quantity)
 //VERIFIER MAJ QTE/ PB ID 
+//
+//
+//
+//
                 let newQuantity = document.querySelector(".itemQuantity").value;
                 newQuantity.textContent = item.target.value;
+                localStorage.setItem(quantity, newQuantity)
            console.log(newQuantity)
 //
             })
-// //VERIFIER SUPP PDT + ACTUALISATION DE LA PAGE            
+//VERIFIER SUPP PDT + ACTUALISATION DE LA PAGE    
+//
+//
+//
+//        
 //              cartItem.addEventListener("click", function(remove){
 //                 let removeItem = remove.target.closest("[data-id]");
 //                 let product = removeItem.dataset;
 //                 removeFromBasket(productId);
-//                 window.location.assign("cart.html")
+//                 // window.location.assign("cart.html")
 //                 console.log(productId)
 //  //               
-            // })
+//             })
             
 }
 }
-               
 async function create_cart(){
     await addItems()
     addListerners()
+
    
 }
 
@@ -109,6 +118,22 @@ form.addEventListener("submit", function (element) {
     city : userCity,
     email : userEmail,
     }
+//Vérification des champs lors du remplissage par l'utilisateur
+form.userFirstName.addEventListener("change", function (){
+    valideName(inputName);
+})
+form.userLastName.addEventListener("change", function(){
+    valideName(inputName);
+})
+form.addEventListener("change", function(){
+    valideCity(inputName);
+})
+form.addEventListener("change", function(){
+    valideCity(inputName);
+})
+form.addListerners("change", function(){
+    valideMail(inputMail);
+})
 
 
 
