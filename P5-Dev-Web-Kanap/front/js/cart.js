@@ -2,8 +2,9 @@
 // Pour chaque produits dans le panier
 async function addItems(){
     document.querySelector('#cart__items').innerHTML = "";
+    allProduct = [];
     for(let product of basket){
-        await getProduct(product.productId).then(function(refProduct){
+        apiProduct = await getProduct(product.productId).then(function(refProduct){
             document.querySelector('#cart__items').innerHTML +=
 
             `<article class="cart__item" data-id="${product.productId}" data-color="${product.color}">
@@ -30,11 +31,14 @@ async function addItems(){
             </div>
             </div>
             </article> `
-                
-        })
-    }
-}
 
+            return refProduct;     
+        })
+     allProduct.push(apiProduct);
+
+    }
+    return allProduct;
+}
 async function addListerners(){        
 // Modification de l'élément dans le panier avec délégation d'événements
         let itemQuantity = document.getElementsByClassName("cart__item")
@@ -78,12 +82,14 @@ async function addListerners(){
 }
 }
 async function create_cart(){
-    await addItems()
+    let refBasket = await addItems();
+    (console.log(refBasket))
     addListerners()
-
+    setTotalQuantity()
+    setTotalPrice(refBasket)
    
 }
-
+console.log(totalPrice)
 // Récupération du panier dans le local storage
 let basket = getBasket();
 
@@ -93,9 +99,8 @@ if(basket.length == 0){
 else{
     create_cart()
 }      
-setTotalQuantity()
-setTotalPrice()
-console.log(totalPrice)
+
+
 
 //---------Formulaire pour passer la commande---------
 //Formulaire utilisateur
@@ -118,23 +123,31 @@ form.addEventListener("submit", function (element) {
     city : userCity,
     email : userEmail,
     }
+
+saveContact(contact)
+window.location.assign("confirmation.html")
+})
+
+
 //Vérification des champs lors du remplissage par l'utilisateur
-form.userFirstName.addEventListener("change", function (){
-    valideName(inputName);
-})
-form.userLastName.addEventListener("change", function(){
-    valideName(inputName);
-})
-form.addEventListener("change", function(){
-    valideCity(inputName);
-})
-form.addEventListener("change", function(){
-    valideCity(inputName);
-})
-form.addListerners("change", function(){
-    valideMail(inputMail);
-})
 
-
-
+form.firstName.addEventListener("change", function (){
+    valideName(this);
+    console.log(firstName.value)
+})
+form.lastName.addEventListener("change", function(){
+    valideName(this);
+    console.log(lastName.value)
+})
+form.address.addEventListener("change", function(){
+    valideCity(this);
+    console.log(address.value)
+})
+form.city.addEventListener("change", function(){
+    valideCity(this);
+    console.log(city.value)
+})
+form.email.addEventListener("change", function(){
+    valideMail(this);
+    console.log(email.value)
 })

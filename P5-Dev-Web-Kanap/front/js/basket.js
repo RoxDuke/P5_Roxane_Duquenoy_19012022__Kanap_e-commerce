@@ -121,21 +121,34 @@ function setTotalQuantity(){
     }
 }
 //Calculer le prix
-//Nous retourne le prix total des articles du panier 
-function getTotalPrice(){
-    let basket = getBasket();
-    let number = 0;
-    for (let product of basket){
-        number = number + parseInt(product.quantity) * parseInt(product.price);
+//Récupére le prix du produit dans le tableau
+function getPrice(refBasket, productId){
+    for(product of refBasket){
+        if(productId == product.id){
+            console.log(product.price)
+        return  product.price;
+        }
     }
-    return number;
+
+}
+//Nous retourne le prix total des articles du panier 
+function getTotalPrice(refBasket){
+    let basket = getBasket();
+    let total = 0;
+    for (let product of basket){
+        total = product.quantity * product.price;
+    console.log(product.quantity)
+    console.log(product.price)
+    console.log(total)
+}
+    return parseInt(total);
 
 }
 
 //Affichage du prix total des articles dans le panier 
-function setTotalPrice(){
+function setTotalPrice(refBasket, productId){
     let totalPrice = document.getElementById("totalPrice");
-    let newPrice = document.createTextNode(`${getTotalPrice()}`);
+    let newPrice = document.createTextNode(`${getTotalPrice(refBasket, productId)}`);
     if (newPrice != undefined){
         totalPrice.replaceChild(newPrice, totalPrice.childNodes[0])
     }
@@ -148,13 +161,12 @@ function setTotalPrice(){
 function valideName (inputName){
     let regExName = new RegExp (/^[a-zA-Z '-]+$/i);
     let testName = regExName.test(inputName.value);
-    let message = inputName.nextElementSibling;
-    if(testName){
-        message.innerHTML = "";
-        return true;
+    console.log(testName)
+    if(testName == true){
+    
     }
     else{
-        message.innerHTML ="Invalid";
+        alert('Saisie incorrecte')
         return false;
     }
 }
@@ -162,27 +174,23 @@ function valideName (inputName){
 function valideCity (inputName){
     let regExCity = new RegExp (/^[a-zA-Z-0-9 '-]+$/i);
     let testName = regExCity.test(inputName.value);
-    let message = inputName.nextElementSibling;
-    if(testName){
-        message.innerHTML = "";
-        return true;
+    if(testName == true){
+        
     }
     else{
-        message.innerHTML ="Invalid";
+        alert("Saisie incorrecte");
         return false;
     }
 }
 //Vérification du format de saisie de mail 
 function valideMail(inputMail){
     let regExMail = new RegExp (/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
-    let tesMail = regExMail.test(inputMail.value);
-    let message = inputMail.nextElementSibling;
-    if(testMail){
-        message.innerHTML = "";
-        return true;
+    let testMail = regExMail.test(inputMail.value);
+    if(testMail == true){
+        
     }
     else{
-        message.innerHTML = "Invalid";
+        alert("Saisie incorrecte");
         return false; 
     }
 }
@@ -200,15 +208,3 @@ function getContact(){
         return JSON.parse(contact)
     }
 }
-// //Validation du formulaire
-// function checkForm(){
-// let form = document.querySelector(".cart__order__form");  
-// if(document.form.value != ""){
-//     //on envoie le formulaire vers l'API
-
-// }
-// else{
-//     alert('Merci de bien vouloir remplir tout les champs de saisie')
-
-// }
-// }
