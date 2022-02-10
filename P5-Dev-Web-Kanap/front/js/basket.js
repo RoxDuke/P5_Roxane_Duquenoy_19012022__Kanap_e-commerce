@@ -76,7 +76,6 @@ function removeFromBasket(productId){
 }
 //Modifier la quantité dans le panier une fois le produit trouvé dans celui-ci
 function changeQuantity(productId,color,quantity){
-    console.log("id: "+productId+" color: "+color+" qte: "+quantity)
     let basket = getBasket();
     let position = findProduct(basket, productId, color);
         if(position >= 0){
@@ -124,8 +123,7 @@ function setTotalQuantity(){
 //Récupére le prix du produit dans le tableau
 function getPrice(refBasket, productId){
     for(product of refBasket){
-        if(productId == product.id){
-            console.log(product.price)
+        if(productId == product._id){
         return  product.price;
         }
     }
@@ -136,19 +134,16 @@ function getTotalPrice(refBasket){
     let basket = getBasket();
     let total = 0;
     for (let product of basket){
-        total = product.quantity * product.price;
-    console.log(product.quantity)
-    console.log(product.price)
-    console.log(total)
+        total += product.quantity * getPrice(refBasket, product.productId);
 }
     return parseInt(total);
 
 }
 
 //Affichage du prix total des articles dans le panier 
-function setTotalPrice(refBasket, productId){
+function setTotalPrice(refBasket){
     let totalPrice = document.getElementById("totalPrice");
-    let newPrice = document.createTextNode(`${getTotalPrice(refBasket, productId)}`);
+    let newPrice = document.createTextNode(`${getTotalPrice(refBasket)}`);
     if (newPrice != undefined){
         totalPrice.replaceChild(newPrice, totalPrice.childNodes[0])
     }

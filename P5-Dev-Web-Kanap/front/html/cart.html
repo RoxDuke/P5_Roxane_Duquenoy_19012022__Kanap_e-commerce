@@ -135,5 +135,17 @@
     </footer>
   <script src="../js/basket.js"></script>
   <script src="../js/cart.js"></script>
+  <script>  
+    window.onload = function(){
+    let basket = getBasket();
+    if(basket.length == 0){
+        alert('Votre panier est vide')
+    }
+    else{
+        create_cart()
+    }   
+    listenerForm() 
+    }
+  </script>
   </body>
 </html>

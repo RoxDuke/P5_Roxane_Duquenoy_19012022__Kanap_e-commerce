@@ -1,6 +1,7 @@
 // Récupération des éléments HTML avec l'interpolation de variables 
 // Pour chaque produits dans le panier
 async function addItems(){
+    let basket = getBasket();
     document.querySelector('#cart__items').innerHTML = "";
     allProduct = [];
     for(let product of basket){
@@ -55,29 +56,21 @@ async function addListerners(){
                 
                 changeQuantity(productId, color, quantity)
 //VERIFIER MAJ QTE/ PB ID 
-//
-//
-//
-//
                 let newQuantity = document.querySelector(".itemQuantity").value;
                 newQuantity.textContent = item.target.value;
                 localStorage.setItem(quantity, newQuantity)
+                create_cart()
            console.log(newQuantity)
 //
             })
-//VERIFIER SUPP PDT + ACTUALISATION DE LA PAGE    
-//
-//
-//
-//        
-//              cartItem.addEventListener("click", function(remove){
-//                 let removeItem = remove.target.closest("[data-id]");
-//                 let product = removeItem.dataset;
-//                 removeFromBasket(productId);
-//                 // window.location.assign("cart.html")
-//                 console.log(productId)
-//  //               
-//             })
+//VERIFIER SUPP PDT + ACTUALISATION DE LA PAGE      
+             cartItem.addEventListener("click", function(remove){
+                let removeItem = remove.target.closest("[data-id]");
+                let product = removeItem.dataset;
+                removeFromBasket(productId);
+                create_cart()
+                console.log(productId)            
+            })
             
 }
 }
@@ -89,65 +82,57 @@ async function create_cart(){
     setTotalPrice(refBasket)
    
 }
-console.log(totalPrice)
-// Récupération du panier dans le local storage
-let basket = getBasket();
-
-if(basket.length == 0){
-    alert('Votre panier est vide')
-}
-else{
-    create_cart()
-}      
-
 
 
 //---------Formulaire pour passer la commande---------
 //Formulaire utilisateur
-let form = document.querySelector(".cart__order__form");
 
-form.addEventListener("submit", function (element) {
-    element.preventDefault()
-    let userFirstName = document.getElementById("firstName");
-    let userLastName = document.getElementById("lastName");
-    let userAddress = document.getElementById("address");
-    let userCity = document.getElementById("city");
-    let userEmail = document.getElementById("email");
-    let order = document.getElementById("order");
-    
-//Création de l'object contact
-    contact = {
-    firstName : userFirstName,
-    lastName : userLastName,
-    address : userAddress, 
-    city : userCity,
-    email : userEmail,
-    }
+function listenerForm(){
+    let form = document.querySelector(".cart__order__form");
 
-saveContact(contact)
-window.location.assign("confirmation.html")
-})
+    form.addEventListener("submit", function (element) {
+        element.preventDefault()
+        let userFirstName = document.getElementById("firstName").value;
+        let userLastName = document.getElementById("lastName").value;
+        let userAddress = document.getElementById("address").value;
+        let userCity = document.getElementById("city").value;
+        let userEmail = document.getElementById("email").value;
+        
+        
+    //Création de l'object contact
+        contact = {
+        firstName : userFirstName,
+        lastName : userLastName,
+        address : userAddress, 
+        city : userCity,
+        email : userEmail,
+        }
+
+    saveContact(contact)
+    window.location.assign("confirmation.html")
+    })
 
 
-//Vérification des champs lors du remplissage par l'utilisateur
+    //Vérification des champs lors du remplissage par l'utilisateur
 
-form.firstName.addEventListener("change", function (){
-    valideName(this);
-    console.log(firstName.value)
-})
-form.lastName.addEventListener("change", function(){
-    valideName(this);
-    console.log(lastName.value)
-})
-form.address.addEventListener("change", function(){
-    valideCity(this);
-    console.log(address.value)
-})
-form.city.addEventListener("change", function(){
-    valideCity(this);
-    console.log(city.value)
-})
-form.email.addEventListener("change", function(){
-    valideMail(this);
-    console.log(email.value)
-})
+    form.firstName.addEventListener("change", function (){
+        valideName(this);
+        console.log(firstName.value)
+    })
+    form.lastName.addEventListener("change", function(){
+        valideName(this);
+        console.log(lastName.value)
+    })
+    form.address.addEventListener("change", function(){
+        valideCity(this);
+        console.log(address.value)
+    })
+    form.city.addEventListener("change", function(){
+        valideCity(this);
+        console.log(city.value)
+    })
+    form.email.addEventListener("change", function(){
+        valideMail(this);
+        console.log(email.value)
+    })
+}
