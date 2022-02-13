@@ -1,9 +1,11 @@
 //Récupération du panier et du contact pour confirmer la commande
 let basket = getBasket();
 let contact = getContact();
-let products = basket.map(function(productId){
-    return productId
+let products = basket.map(function(product){
+    
+    return product.productId
 })
+console.log(products)
 
 let orderConfirm = {
     contact : contact,
@@ -24,7 +26,10 @@ let sendParams = {
 };
 //Envoi vers le serveur 
 fetch("http://localhost:3000/api/products/order", sendParams)
-    .then(function(order){
+    .then(function(response){
+        return response.json();
+    }).then(function(order){
+        console.log(order)
         let orderId = document.getElementById("orderId");
         let newOrderId = document.createTextNode(`${order.orderId}`);
         if(newOrderId != undefined){
@@ -32,4 +37,6 @@ fetch("http://localhost:3000/api/products/order", sendParams)
         }
     
 })
+
+
     
