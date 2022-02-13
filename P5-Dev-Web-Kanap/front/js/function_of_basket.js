@@ -20,7 +20,7 @@ function createProduct(productId, name, color, quantity){
     }
     return product
 }
-//Enregistrer le panier, envoi vers local storage
+//Sauvegarde du panier, envoi vers local storage
 function saveBasket(basket){
     localStorage.setItem("basket",JSON.stringify(basket));
 }
@@ -34,7 +34,7 @@ function getBasket () {
         return JSON.parse(basket);
     }
 }
-// Fonction pour rechercher un produit et me renvoyer le numéro de case
+// Fonction pour rechercher/trouver un produit et me renvoyer le numéro de case
 function findProduct(basket,id, color){
     let i = 0;
     index=-1
@@ -61,10 +61,9 @@ function addBasket(productId, name, color, quantity){
     else{
         basket[position].quantity = basket[position].quantity + parseInt(quantity);
     }  
-//Ajout du produit dans le panier 
+//Sauvegarde du produit dans le panier 
     saveBasket(basket);
 }
-
 //-----------------Sur la page panier-------------------//
 
 // //Retirer un produit du panier 
@@ -95,19 +94,18 @@ function changeQuantity(productId,color,quantity){
         console.log(changeQuantity)
     saveBasket(basket);
  }
- 
 //Calculer la quantité dans le panier
-//Nous retourne le nombre d'articles dans le panier
+//Nous retourne la quantité du produit dans le panier
 function getNumberProduct(){
     let basket = getBasket();
     let number = 0;
     for(let product of basket){
         number = number + product.quantity;
     }
-    return number; 
-    
+    return number;   
 }
-//Affichage de la quantité de produits dans le panier 
+//Affichage de la quantité totale de produits dans le panier 
+//Met à jour la quantité totale
 function setTotalQuantity(){
     let totalQuantity = document.getElementById("totalQuantity");
     let newQuantity = document.createTextNode(`${getNumberProduct()}`);
@@ -127,9 +125,8 @@ function getPrice(refBasket, productId){
         return  product.price;
         }
     }
-
 }
-//Nous retourne le prix total des articles du panier 
+//Retourne le prix total des articles du panier 
 function getTotalPrice(refBasket){
     let basket = getBasket();
     let total = 0;
@@ -137,10 +134,9 @@ function getTotalPrice(refBasket){
         total += product.quantity * getPrice(refBasket, product.productId);
 }
     return parseInt(total);
-
 }
-
 //Affichage du prix total des articles dans le panier 
+//Met à jour le prix total
 function setTotalPrice(refBasket){
     let totalPrice = document.getElementById("totalPrice");
     let newPrice = document.createTextNode(`${getTotalPrice(refBasket)}`);
@@ -158,7 +154,7 @@ function valideName (inputName){
     let testName = regExName.test(inputName.value);
     console.log(testName)
     if(testName == true){
-    
+        
     }
     else{
         alert('Saisie incorrecte')
@@ -170,7 +166,7 @@ function valideCity (inputName){
     let regExCity = new RegExp (/^[a-zA-Z-0-9 '-]+$/i);
     let testName = regExCity.test(inputName.value);
     if(testName == true){
-        
+
     }
     else{
         alert("Saisie incorrecte");

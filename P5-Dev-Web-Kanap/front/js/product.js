@@ -1,7 +1,6 @@
 /**
  * Insertion d'un produit grâce à son id
  */
-
 //Récupération de l'id du produit dans l'URL
 let params = new URLSearchParams(window.location.search)
 let productId = params.get("id");
@@ -10,11 +9,10 @@ console.log("id" , productId);
 
 //Récupération d'un seul et unique produit dans l'API en fonction de l'ID 
 fetch("http://localhost:3000/api/products/"+productId)
-
-//Si la réponse de la console est 200
     .then(function(response){
-
+//Si la réponse de la console est 200 (vraie)
         if(response.status == 200){
+//Récupération des caractéristiques du produit en fonction de son ID
             let name = document.getElementById("title");
             let price = document.getElementById("price");
             let description = document.getElementById("description");
@@ -45,7 +43,6 @@ fetch("http://localhost:3000/api/products/"+productId)
             })
         }
     })
-  
 //Eléments à ajouter dans le panier lors du clic de l'utilisateur 
 let button = document.getElementById('addToCart');
 

@@ -11,6 +11,7 @@ let orderConfirm = {
     
 }
 console.log(orderConfirm)
+
 // Requête POST vers l'API pour envoyer la commande
 //Paramètres pour utiliser la requête POST
 let sendParams = {
@@ -32,5 +33,3 @@ fetch("http://localhost:3000/api/products/order", sendParams)
     
 })
     
-
-localStorage.clear()
