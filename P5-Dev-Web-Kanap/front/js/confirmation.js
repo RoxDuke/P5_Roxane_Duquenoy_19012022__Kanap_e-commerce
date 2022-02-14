@@ -35,8 +35,12 @@ fetch("http://localhost:3000/api/products/order", sendParams)
         if(newOrderId != undefined){
             orderId.replaceChild(newOrderId, orderId.childNodes[0]);
         }
-    
 })
-
+    try{
+        Error("Erreur")
+    }
+    catch{
+        console.log("Erreur")
+    }
 
     
