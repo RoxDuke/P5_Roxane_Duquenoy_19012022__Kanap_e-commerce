@@ -3,44 +3,44 @@
  * La méthode 'fetch()' retourne une 'promise' contenant une réponse 
  */
 fetch(" http://localhost:3000/api/products")
-    .then(function(response) {
+    .then(function (response) {
         //si réponse vraie de la console
-        if(response.ok){
+        if (response.ok) {
             return response.json();
         }
-        console.log(response);
-    }) 
-/**
- * Fonction 'then()' utilisée si 'Promise = resolve'
- * Création d'éléments dans le DOM 
- * Ajout des données 'product' sur chaque éléments
- */
-.then(function (value){
-//Exécution de la fonction pour chaque élément 
-    value.forEach(product =>{
-        let items = document.getElementById('items');
-//Création des enfants de l'élément parent (items)
-        a = document.createElement('a');
-        article = document.createElement('article');
+    })
+    /**
+     * Fonction 'then()' utilisée si 'Promise = resolve'
+     * Création d'éléments dans le DOM 
+     * Ajout des données 'product' sur chaque éléments
+     */
+    .then(function (value) {
+        //Exécution de la fonction pour chaque élément 
+        value.forEach(product => {
+            let items = document.getElementById('items');
+            //Création des enfants de l'élément parent (items)
+            a = document.createElement('a');
+            article = document.createElement('article');
             article.classList.add("productCard");
-        img = document.createElement('img');
+            img = document.createElement('img');
             img.classList.add("productImage");
-        h3 = document.createElement('h3');
+            h3 = document.createElement('h3');
             h3.classList.add("productName");
-        p = document.createElement('p');
+            p = document.createElement('p');
             p.classList.add("productDescription");
-//Liste des enfants de l'élément parent (id) 'items'
-        items.appendChild(a);
-        a.appendChild(article);
-        article.appendChild(img);
-        article.appendChild(h3);
-        article.appendChild(p);
-//Eléments = noms des données fournit dans l'API 
-        a.href = "product.html?id=" + product._id;
-        img.src = product.imageUrl;
-        h3.innerHTML = product.name;
-        img.alt = product.altTxt;
-        p.innerHTML = product.description;
-    }
-,)})
-       
+            //Liste des enfants de l'élément parent (id) 'items'
+            items.appendChild(a);
+            a.appendChild(article);
+            article.appendChild(img);
+            article.appendChild(h3);
+            article.appendChild(p);
+            //Eléments = noms des données fournit dans l'API 
+            a.href = "product.html?id=" + product._id;
+            img.src = product.imageUrl;
+            h3.innerHTML = product.name;
+            img.alt = product.altTxt;
+            p.innerHTML = product.description;
+        }
+,)
+    })
+
